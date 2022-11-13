@@ -31,5 +31,5 @@ if (env.SSL_CERT_PATH && env.SSL_KEY_PATH) {
       },
       app
     )
-    .listen(port)
+    .listen(3000)
 } else app.listen(3000)
