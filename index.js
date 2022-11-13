@@ -2,6 +2,7 @@ import express from 'express'
 import {createProxyMiddleware} from 'http-proxy-middleware'
 import { env } from 'process'
 import * as https from 'https'
+import { readFileSync } from 'fs'
 
 const app = express()
 
@@ -25,8 +26,8 @@ if (env.SSL_CERT_PATH && env.SSL_KEY_PATH) {
   https
     .createServer(
       {
-        key: env.SSL_KEY_PATH,
-        cert: env.SSL_CERT_PATH,
+        key: readFileSync(env.SSL_KEY_PATH).toString(),
+        cert: readFileSync(env.SSL_CERT_PATH).toString(),
       },
       app
     )
