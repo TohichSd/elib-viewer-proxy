@@ -1,5 +1,7 @@
 import express from 'express'
 import {createProxyMiddleware} from 'http-proxy-middleware'
+import { env } from 'process'
+import * as https from 'https'
 
 const app = express()
 
@@ -19,4 +21,14 @@ const options = {
 
 app.use('/', createProxyMiddleware(options))
 
-app.listen(3000)
+if (env.SSL_CERT_PATH && env.SSL_KEY_PATH) {
+  https
+    .createServer(
+      {
+        key: env.SSL_KEY_PATH,
+        cert: env.SSL_CERT_PATH,
+      },
+      this.app
+    )
+    .listen(port)
+} else app.listen(3000)
