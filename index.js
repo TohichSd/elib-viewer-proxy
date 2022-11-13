@@ -10,7 +10,7 @@ const PORT = 3000
 
 const onProxyRes = (proxyRes, req) => {
   if (proxyRes.headers['set-cookie'])
-    console.log(proxyRes.headers['set-cookie'].map(header => header + '; SameSite=None'))
+    proxyRes.headers['set-cookie'] = proxyRes.headers['set-cookie'].map(header => header + '; SameSite=None')
   proxyRes.headers['Access-Control-Allow-Origin'] = req.headers['origin'] || req.headers['referer']
   proxyRes.headers['Access-Control-Allow-Credentials'] = 'true'
   proxyRes.headers['Access-Control-Allow-Headers'] = '*'
