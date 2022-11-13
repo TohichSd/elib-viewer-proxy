@@ -28,7 +28,7 @@ if (env.SSL_CERT_PATH && env.SSL_KEY_PATH) {
         key: env.SSL_KEY_PATH,
         cert: env.SSL_CERT_PATH,
       },
-      this.app
+      app
     )
     .listen(port)
 } else app.listen(3000)
